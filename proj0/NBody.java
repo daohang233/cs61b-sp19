@@ -1,9 +1,12 @@
-class NBody {
+public class NBody {
     /** Read the radius of the universe  */
     public static double readRadius(String path) {
         In in = new In(path);
         in.readInt();
         return in.readDouble();
+    }
+    public NBody() {
+
     }
 
     /** Read an array of Bodys from the specific file */
@@ -12,7 +15,7 @@ class NBody {
         int n = in.readInt();
         in.readDouble();
 
-        Body[] res = new Body[5];
+        Body[] res = new Body[n];
 
         for(int i = 0;i < n;i++) {
             double xxPos = in.readDouble();
