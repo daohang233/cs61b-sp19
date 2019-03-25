@@ -1,11 +1,11 @@
-class Body {
+public class Body {
     public double xxPos;
     public double yyPos;
     public double xxVel;
     public double yyVel;
     public double mass;
     public String imgFileName;
-    static final double G = 6.67 * 10e-12;
+    private static final double G = 6.67 * 10e-12;
 
     public Body(double xP, double yP, double xV, double yV, double m, String img) {
         xxPos = xP;
@@ -25,7 +25,7 @@ class Body {
         imgFileName = b.imgFileName;
     }
     /** Calculate square root of input a */
-    public static double sqrtRoot(double c){
+    private static double sqrtRoot(double c){
         if(c < 0) 
             return Double.NaN;
         double err = 1e-15;
