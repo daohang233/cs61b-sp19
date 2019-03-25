@@ -1,3 +1,4 @@
+/** Simulation of the universe */
 public class NBody {
     /** Read the radius of the universe  */
     public static double readRadius(String path) {
