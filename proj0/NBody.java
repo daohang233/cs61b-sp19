@@ -7,7 +7,7 @@ class NBody {
     }
 
     /** Read an array of Bodys from the specific file */
-    public static Body[] readallBodys(String path) {
+    public static Body[] readBodies(String path) {
         In in = new In(path);
         int n = in.readInt();
         in.readDouble();
@@ -33,7 +33,7 @@ class NBody {
         double dt = Double.valueOf(args[1]);
         String filename = args[2];
         double radius = readRadius(filename);
-        Body[] allBodys = readallBodys(filename);
+        Body[] allBodys = readBodies(filename);
 
         /** Creating an animation */
         double time = 0;
