@@ -5,7 +5,7 @@ public class ArrayDeque<T> {
     private int start;
     private int end;
 
-    ArrayDeque() {
+    public ArrayDeque() {
         start = 0;
         end = -1;
         items = (T[]) new Object[8];
@@ -15,14 +15,14 @@ public class ArrayDeque<T> {
         start = 0;
         end = -1;
         items = (T[]) new Objects[8];
-        for(int i = 0;i < other.size();i++) {
+        for (int i = 0; i < other.size(); i++) {
             addLast((T) other.get(i));
         }
     }
 
     /** If the usage factor is more than 50%, double the size of deque */
-    public void resizeCheck() {
-        if(size() > items.length * 0.5) {
+    private void resizeCheck() {
+        if (size() > items.length * 0.5) {
             T[] newItems = (T[]) new Object[items.length * 2];
             System.arraycopy(items, 0, newItems, 0, end + start);
             if (start < 0) {
@@ -51,11 +51,7 @@ public class ArrayDeque<T> {
 
     /** Return whether the deque is empty */
     public boolean isEmpty() {
-        if(size() == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return size() == 0;
     }
 
     /** Return the number of the items in the deque */
@@ -65,7 +61,7 @@ public class ArrayDeque<T> {
 
     /** Print the items in the deque from first to last */
     public void printDeque() {
-        for(int i = 0;i < size();i++) {
+        for (int i = 0; i < size(); i++) {
             System.out.print(items[(items.length + start + i) % items.length] + " ");
         }
         System.out.println();
@@ -93,5 +89,69 @@ public class ArrayDeque<T> {
             return null;
         }
         return (T) items[(index + start + items.length) % items.length];
+    }
+
+    public static void main(String[] args) {
+
+        /*ArrayDeque<Integer> ad = new ArrayDeque<>();
+
+        ad.addFirst(5);
+
+        ad.addFirst(6);
+
+        ad.addLast(7);
+
+        ad.addFirst(4);
+
+        ad.addLast(8);
+
+        ad.addFirst(3);
+
+        ad.addLast(1);
+
+        ad.addLast(0);
+
+        ad.addLast(9);
+
+        ad.addFirst(2);
+
+        ad.addFirst(1);
+
+        System.out.println(ad.get(0));
+
+        System.out.println(ad.get(7));
+
+        ad.removeLast();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();*/
+
+        ArrayDeque<Integer> copy = new ArrayDeque<>();
+
+        copy.addFirst(5);
+
+        copy.addLast(6);
+
     }
 }

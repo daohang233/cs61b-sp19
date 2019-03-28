@@ -12,7 +12,7 @@ public class LinkedListDeque<T> {
     public LinkedListDeque(LinkedListDeque other) {
         size = other.size();
         sentinel = new TNode(0, sentinel, sentinel);
-        for (int i = 0;i < size;i++) {
+        for (int i = 0; i < size; i++) {
             addFirst((T) other.get(i));
         }
     }
@@ -35,11 +35,7 @@ public class LinkedListDeque<T> {
 
     /** Return whether the deque is empty */
     public boolean isEmpty() {
-        if (size > 0) {
-            return false;
-        } else {
-            return  true;
-        }
+        return size() > 0;
     }
 
     /** Return the number of items in the deque */
@@ -59,6 +55,9 @@ public class LinkedListDeque<T> {
 
     /** Remove and return the first item */
     public T removeFirst() {
+        if (size() == 0) {
+            return null;
+        }
         T res = (T) sentinel.next.item;
         sentinel.next = sentinel.next.next;
         sentinel.next.pre = sentinel;
@@ -68,9 +67,13 @@ public class LinkedListDeque<T> {
 
     /** Remove and return the last item */
     public T removeLast() {
+        if (size() == 0) {
+            return null;
+        }
         T res = (T) sentinel.pre.item;
         sentinel.pre = sentinel.pre.pre;
         sentinel.pre.next = sentinel;
+        size--;
         return res;
     }
 
@@ -94,5 +97,25 @@ public class LinkedListDeque<T> {
             //TODO fuck java
         }
         return null;
+    }
+     public static void main(String[] args) {
+
+        LinkedListDeque<Integer> dq = new LinkedListDeque<>();
+
+        dq.addFirst(666);
+
+        dq.removeLast();
+
+        //dq.addLast(888);
+
+        //dq.addLast(999);
+
+        dq.addFirst(555);
+        dq.removeLast();
+        System.out.println(dq.size());
+
+
+        dq.printDeque();
+
     }
 }
