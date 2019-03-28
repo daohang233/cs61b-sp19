@@ -11,6 +11,11 @@ public class LinkedListDeque<T> {
 
     public LinkedListDeque(LinkedListDeque other) {
         size = other.size();
+        if (size == 0) {
+            sentinel = new TNode(0, null, null);
+            sentinel.next = sentinel;
+            sentinel.pre = sentinel;
+        }
         sentinel = new TNode(0, sentinel, sentinel);
         for (int i = 0; i < size; i++) {
             addFirst((T) other.get(i));
@@ -35,7 +40,7 @@ public class LinkedListDeque<T> {
 
     /** Return whether the deque is empty */
     public boolean isEmpty() {
-        return size() > 0;
+        return size() == 0;
     }
 
     /** Return the number of items in the deque */
@@ -93,29 +98,81 @@ public class LinkedListDeque<T> {
 
     /** Return the item at the given index (recursion) */
     public T getRecursive(int index) {
-        if (index == 0) {
-            //TODO fuck java
-        }
-        return null;
+        return helpRecursive(sentinel.next, index - 1);
     }
-     public static void main(String[] args) {
 
-        LinkedListDeque<Integer> dq = new LinkedListDeque<>();
-
-        dq.addFirst(666);
-
-        dq.removeLast();
-
-        //dq.addLast(888);
-
-        //dq.addLast(999);
-
-        dq.addFirst(555);
-        dq.removeLast();
-        System.out.println(dq.size());
-
-
-        dq.printDeque();
+    /** Recursive get item of given index */
+    private T helpRecursive(TNode ptr, int index) {
+        if (index == 0) {
+            return (T) ptr.item;
+        } else if (index < 0) {
+            return null;
+        }
+        return helpRecursive(ptr.next, index - 1);
+    }
+//    public static void main(String[] args) {
+//
+//        LinkedListDeque<Integer> ad = new LinkedListDeque<>();
+//
+//        ad.addFirst(5);
+//
+//        ad.addFirst(6);
+//
+//        ad.addLast(7);
+//
+//        ad.addFirst(4);
+//
+//        ad.addLast(8);
+//
+//        ad.addFirst(3);
+//
+//        ad.addLast(1);
+//
+//        ad.addLast(0);
+//
+//        ad.addLast(9);
+//
+//        ad.addFirst(2);
+//
+//        ad.addFirst(1);
+//
+//        System.out.println(ad.get(0));
+//
+//        System.out.println(ad.get(7));
+//        System.out.println(ad.getRecursive(7));
+//        ad.removeLast();
+//
+//        ad.removeFirst();
+//
+//        ad.removeFirst();
+//
+//        ad.removeFirst();
+//
+//        ad.removeFirst();
+//
+//        ad.removeFirst();
+//
+//        ad.removeFirst();
+//
+//        ad.removeFirst();
+//
+//        ad.removeFirst();
+//
+//        ad.removeFirst();
+//
+//        ad.removeFirst();
+//
+//        ad.removeFirst();
+//
+//        ad.removeFirst();
+//
+//        System.out.println(ad.isEmpty());
+//
+//        LinkedListDeque<Integer> copy = new LinkedListDeque<Integer>(ad);
+//
+//        copy.addFirst(5);
+//
+//        copy.addLast(6);
 
     }
 }
