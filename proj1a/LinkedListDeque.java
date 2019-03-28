@@ -1,4 +1,17 @@
 public class LinkedListDeque<T> {
+    class TNode<T> {
+        public T item;
+        public TNode next;
+        public TNode pre;
+
+        /** */
+        public TNode(T i, TNode p, TNode n) {
+            item = i;
+            pre =  p;
+            next = n;
+        }
+    }
+
     private TNode sentinel;
     private int size;
 
@@ -10,18 +23,17 @@ public class LinkedListDeque<T> {
     }
 
     public LinkedListDeque(LinkedListDeque other) {
-        size = other.size();
+        size = 0;
         sentinel = new TNode(0, null, null);
         sentinel.next = sentinel;
         sentinel.pre = sentinel;
-        if (size == 0) {
+        if (other.size() == 0) {
             return;
         }
 
-        for (int i = 0; i < size; i++) {
-            addFirst((T) other.get(i));
+        for (int i = 0; i < other.size(); i++) {
+            addLast((T) other.get(i));
         }
-
     }
 
     /** Add an item of type T to the front of the deque */
@@ -88,21 +100,21 @@ public class LinkedListDeque<T> {
 
     /** Return the item at the given index (iteration) */
     public T get(int index) {
-        int cnt = 0;
-        TNode ptr = sentinel;
-        while (ptr.next != null) {
-            ptr = ptr.next;
+        int cnt = -1;
+        TNode ptr = sentinel.next;
+        while (ptr != sentinel) {
             cnt++;
             if (cnt == index) {
                 return (T) ptr.item;
             }
+            ptr = ptr.next;
         }
         return null;
     }
 
     /** Return the item at the given index (recursion) */
     public T getRecursive(int index) {
-        return helpRecursive(sentinel.next, index - 1);
+        return (T) helpRecursive(sentinel.next, index);
     }
 
     /** Recursive get item of given index */
@@ -112,13 +124,14 @@ public class LinkedListDeque<T> {
         } else if (index < 0) {
             return null;
         }
-        return helpRecursive(ptr.next, index - 1);
+        return (T) helpRecursive(ptr.next, index - 1);
     }
     public static void main(String[] args) {
 
         LinkedListDeque<Integer> ad = new LinkedListDeque<>();
 
         ad.addFirst(5);
+        System.out.println(ad.getRecursive(0));
 
         ad.addFirst(6);
 
@@ -140,10 +153,6 @@ public class LinkedListDeque<T> {
 
         ad.addFirst(1);
 
-        System.out.println(ad.get(0));
-
-        System.out.println(ad.get(7));
-        System.out.println(ad.getRecursive(7));
         ad.removeLast();
 
         ad.removeFirst();
@@ -154,21 +163,6 @@ public class LinkedListDeque<T> {
 
         ad.removeFirst();
 
-        ad.removeFirst();
-
-        ad.removeFirst();
-
-        ad.removeFirst();
-
-        ad.removeFirst();
-
-        ad.removeFirst();
-
-        ad.removeFirst();
-
-        ad.removeFirst();
-
-        //ad.removeFirst();
 
         System.out.println(ad.isEmpty());
 
