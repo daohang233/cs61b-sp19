@@ -15,6 +15,9 @@ public class ArrayDeque<T> {
         start = 0;
         end = -1;
         items = (T[]) new Objects[8];
+        if (other.size() == 0) {
+            return;
+        }
         for (int i = 0; i < other.size(); i++) {
             addLast((T) other.get(i));
         }
@@ -24,7 +27,7 @@ public class ArrayDeque<T> {
     private void resizeCheck() {
         if (size() > items.length * 0.5) {
             T[] newItems = (T[]) new Object[items.length * 2];
-            System.arraycopy(items, 0, newItems, 0, end + start);
+            System.arraycopy(items, 0, newItems, 0, (end +  items.length + 1) % items.length);
             if (start < 0) {
                 System.arraycopy(items, items.length + start, newItems,
                         newItems.length + start, -start);
@@ -93,7 +96,7 @@ public class ArrayDeque<T> {
 
     public static void main(String[] args) {
 
-        /*ArrayDeque<Integer> ad = new ArrayDeque<>();
+        ArrayDeque<Integer> ad = new ArrayDeque<>();
 
         ad.addFirst(5);
 
@@ -145,9 +148,9 @@ public class ArrayDeque<T> {
 
         ad.removeFirst();
 
-        ad.removeFirst();*/
+        ad.removeFirst();
 
-        ArrayDeque<Integer> copy = new ArrayDeque<>();
+        ArrayDeque<Integer> copy = new ArrayDeque<Integer>(ad);
 
         copy.addFirst(5);
 
