@@ -11,15 +11,17 @@ public class LinkedListDeque<T> {
 
     public LinkedListDeque(LinkedListDeque other) {
         size = other.size();
+        sentinel = new TNode(0, null, null);
+        sentinel.next = sentinel;
+        sentinel.pre = sentinel;
         if (size == 0) {
-            sentinel = new TNode(0, null, null);
-            sentinel.next = sentinel;
-            sentinel.pre = sentinel;
+            return;
         }
-        sentinel = new TNode(0, sentinel, sentinel);
+
         for (int i = 0; i < size; i++) {
             addFirst((T) other.get(i));
         }
+
     }
 
     /** Add an item of type T to the front of the deque */
@@ -64,6 +66,7 @@ public class LinkedListDeque<T> {
             return null;
         }
         T res = (T) sentinel.next.item;
+        sentinel.next.item = null;
         sentinel.next = sentinel.next.next;
         sentinel.next.pre = sentinel;
         size--;
@@ -76,6 +79,7 @@ public class LinkedListDeque<T> {
             return null;
         }
         T res = (T) sentinel.pre.item;
+        sentinel.pre.item = null;
         sentinel.pre = sentinel.pre.pre;
         sentinel.pre.next = sentinel;
         size--;
@@ -110,69 +114,69 @@ public class LinkedListDeque<T> {
         }
         return helpRecursive(ptr.next, index - 1);
     }
-//    public static void main(String[] args) {
-//
-//        LinkedListDeque<Integer> ad = new LinkedListDeque<>();
-//
-//        ad.addFirst(5);
-//
-//        ad.addFirst(6);
-//
-//        ad.addLast(7);
-//
-//        ad.addFirst(4);
-//
-//        ad.addLast(8);
-//
-//        ad.addFirst(3);
-//
-//        ad.addLast(1);
-//
-//        ad.addLast(0);
-//
-//        ad.addLast(9);
-//
-//        ad.addFirst(2);
-//
-//        ad.addFirst(1);
-//
-//        System.out.println(ad.get(0));
-//
-//        System.out.println(ad.get(7));
-//        System.out.println(ad.getRecursive(7));
-//        ad.removeLast();
-//
-//        ad.removeFirst();
-//
-//        ad.removeFirst();
-//
-//        ad.removeFirst();
-//
-//        ad.removeFirst();
-//
-//        ad.removeFirst();
-//
-//        ad.removeFirst();
-//
-//        ad.removeFirst();
-//
-//        ad.removeFirst();
-//
-//        ad.removeFirst();
-//
-//        ad.removeFirst();
-//
-//        ad.removeFirst();
-//
-//        ad.removeFirst();
-//
-//        System.out.println(ad.isEmpty());
-//
-//        LinkedListDeque<Integer> copy = new LinkedListDeque<Integer>(ad);
-//
-//        copy.addFirst(5);
-//
-//        copy.addLast(6);
+    public static void main(String[] args) {
+
+        LinkedListDeque<Integer> ad = new LinkedListDeque<>();
+
+        ad.addFirst(5);
+
+        ad.addFirst(6);
+
+        ad.addLast(7);
+
+        ad.addFirst(4);
+
+        ad.addLast(8);
+
+        ad.addFirst(3);
+
+        ad.addLast(1);
+
+        ad.addLast(100);
+
+        ad.addLast(9);
+
+        ad.addFirst(2);
+
+        ad.addFirst(1);
+
+        System.out.println(ad.get(0));
+
+        System.out.println(ad.get(7));
+        System.out.println(ad.getRecursive(7));
+        ad.removeLast();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        ad.removeFirst();
+
+        //ad.removeFirst();
+
+        System.out.println(ad.isEmpty());
+
+        LinkedListDeque<Integer> copy = new LinkedListDeque<Integer>(ad);
+
+        copy.addFirst(5);
+
+        copy.addLast(6);
 
     }
 }
