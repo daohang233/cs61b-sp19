@@ -2,17 +2,19 @@ import java.util.Objects;
 
 public class ArrayDeque<T> {
     private T[] items;
-    private int size;
     private int start;
     private int end;
 
     ArrayDeque() {
         start = 0;
         end = -1;
-        items = (T[]) new Objects[8];
+        items = (T[]) new Object[8];
     }
 
     public ArrayDeque(ArrayDeque other) {
+        start = 0;
+        end = -1;
+        items = (T[]) new Objects[8];
         for(int i = 0;i < other.size();i++) {
             addLast((T) other.get(i));
         }
@@ -20,7 +22,7 @@ public class ArrayDeque<T> {
 
     /** If the usage factor is more than 50%, double the size of deque */
     public void resizeCheck() {
-        if(size > items.length * 0.5) {
+        if(size() > items.length * 0.5) {
             T[] newItems = (T[]) new Object[items.length * 2];
             System.arraycopy(items, 0, newItems, 0, end + start);
             if (start < 0) {
@@ -35,6 +37,8 @@ public class ArrayDeque<T> {
     public void addFirst(T item) {
         resizeCheck();
         start--;
+        items = (T[]) items;
+        int tmp = (start + items.length) % items.length;
         items[(start + items.length) % items.length] = item;
     }
 
@@ -62,8 +66,9 @@ public class ArrayDeque<T> {
     /** Print the items in the deque from first to last */
     public void printDeque() {
         for(int i = 0;i < size();i++) {
-            System.out.print(items[(items.length + start + i) % items.length]);
+            System.out.print(items[(items.length + start + i) % items.length] + " ");
         }
+        System.out.println();
     }
 
     /** Remove and return the first item */

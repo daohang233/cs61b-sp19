@@ -37,7 +37,7 @@ public class LinkedListDequeTest {
 		System.out.println("Running add/isEmpty/Size test.");
 		//System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
 
-		ArrayDeque<String> lld1 = new ArrayDeque<>();
+		ArrayDeque<String> lld1 = new ArrayDeque<String>();
 
 		boolean passed = checkEmpty(true, lld1.isEmpty());
 
