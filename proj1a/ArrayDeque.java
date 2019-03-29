@@ -125,13 +125,9 @@ public class ArrayDeque<T> {
 
         ad.addFirst(5);
         System.out.println(ad.get(0));
-
         ad.addFirst(6);
-
         ad.addLast(7);
-
         ad.addFirst(4);
-
         ad.addLast(8);
 
         ad.addFirst(3);
