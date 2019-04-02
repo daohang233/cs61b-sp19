@@ -69,7 +69,7 @@ public class ArrayDeque<T> {
 
     /** Return the number of the items in the deque */
     public int size() {
-        return end - start + 1;
+        return (end - start + items.length + 1) % items.length;
     }
 
     /** Print the items in the deque from first to last */
@@ -121,7 +121,10 @@ public class ArrayDeque<T> {
 
     public static void main(String[] args) {
 
+
         ArrayDeque<Integer> ad = new ArrayDeque<>();
+        ad.removeLast();
+        ad.removeFirst();
         for(int i = 0; i < 5; i++) {
             ad.addLast(i);
         }
@@ -130,7 +133,9 @@ public class ArrayDeque<T> {
         System.out.println(ad.get(0));
         ad.addFirst(6);
         ad.addLast(7);
+        ad.removeFirst();
         ad.addFirst(4);
+        ad.removeLast();
         ad.addLast(8);
 
         ad.addFirst(3);
