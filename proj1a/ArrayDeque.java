@@ -62,7 +62,7 @@ public class ArrayDeque<T> {
     public void addLast(T item) {
         resizeCheck();
         end++;
-        System.out.println("here is the index " + (end + items.length) % items.length);
+//        System.out.println("here is the index " + (end + items.length) % items.length);
         items[(end + items.length) % items.length] = item;
     }
 
