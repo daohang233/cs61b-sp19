@@ -14,11 +14,12 @@ public class ArrayDeque<T> {
     public ArrayDeque(ArrayDeque other) {
         start = 0;
         end = -1;
-        items = (T[]) new Objects[8];
+        items = (T[]) new Object[8];
         if (other.size() == 0) {
             return;
         }
         for (int i = 0; i < other.size(); i++) {
+            T a = (T) other.get(i);
             addLast((T) other.get(i));
         }
     }
@@ -35,7 +36,7 @@ public class ArrayDeque<T> {
             deleteDeque();
             items = newItems;
         }
-        if (size() < items.length * 0.25 && size() > 8) {
+        if (size() < items.length * 0.25 && size() >= 4) {
             T[] newItems = (T[]) new Object[items.length / 2];
             for (int i = 0; i < size(); i++) {
                 System.arraycopy(items, start, newItems, i, 1);
@@ -63,7 +64,11 @@ public class ArrayDeque<T> {
         resizeCheck();
         end++;
 //        System.out.println("here is the index " + (end + items.length) % items.length);
-        items[(end + items.length) % items.length] = item;
+        int index = (end + items.length) % items.length;
+        String a = items.getClass().getTypeName();
+        String b = item.getClass().getTypeName();
+//        String c = items[0].getClass().getTypeName();
+        items[(end + items.length) % items.length] = (T) item;
     }
 
     /** Return whether the deque is empty */
@@ -126,7 +131,7 @@ public class ArrayDeque<T> {
     public static void main(String[] args) {
 
 
-        ArrayDeque<Integer> ad = new ArrayDeque<>();
+        ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
         ad.removeLast();
         ad.removeFirst();
         for(int i = 0; i < 5; i++) {
@@ -141,6 +146,9 @@ public class ArrayDeque<T> {
             ad.addLast(i);
         }
         System.out.println(ad.isEmpty());
+        for(int i = 0;i < ad.size(); i++) {
+            System.out.println(ad.get(i));
+        }
 
         ArrayDeque<Integer> copy = new ArrayDeque<Integer>(ad);
 
