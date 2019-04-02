@@ -116,13 +116,16 @@ public class ArrayDeque<T> {
         if (index > size()) {
             return null;
         }
-        return (T) items[(index + start + items.length + 1) % items.length];
+        return (T) items[(index + start + items.length) % items.length];
     }
 
     public static void main(String[] args) {
 
         ArrayDeque<Integer> ad = new ArrayDeque<>();
-
+        for(int i = 0; i < 5; i++) {
+            ad.addLast(i);
+        }
+        System.out.println(ad.get(0));
         ad.addFirst(5);
         System.out.println(ad.get(0));
         ad.addFirst(6);
