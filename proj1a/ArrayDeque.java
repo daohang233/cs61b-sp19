@@ -39,13 +39,18 @@ public class ArrayDeque<T> {
         if (size() < items.length * 0.25 && size() >= 4) {
             T[] newItems = (T[]) new Object[items.length / 2];
             for (int i = 0; i < size(); i++) {
-                System.arraycopy(items, start, newItems, i, 1);
+                System.arraycopy(items, start + i, newItems, i, 1);
             }
+
 //            System.arraycopy(items, 0, newItems, 0, (end +  items.length + 1) % items.length);
             if (start < 0) {
                 System.arraycopy(items, items.length + start, newItems,
                         newItems.length + start, -start);
+                items = newItems;
+                return;
             }
+            end = size() - 1;
+            start = 0;
             items = newItems;
         }
     }
@@ -129,33 +134,32 @@ public class ArrayDeque<T> {
     }
 
     public static void main(String[] args) {
-
+        int size = 0;
 
         ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
         ad.removeLast();
         ad.removeFirst();
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 10; i++) {
             ad.addLast(i);
+            size = ad.size();
         }
 
         for (int i = 0;i < 5;i ++) {
             ad.removeFirst();
+            ad.removeFirst();
+            size = ad.size();
         }
 
         for(int i = 0; i < 5; i++) {
             ad.addLast(i);
+            size = ad.size();
         }
         System.out.println(ad.isEmpty());
         for(int i = 0;i < ad.size(); i++) {
             System.out.println(ad.get(i));
         }
 
-        ArrayDeque<Integer> copy = new ArrayDeque<Integer>(ad);
 
-        copy.addFirst(5);
-
-        copy.addLast(6);
-        System.out.println(copy.get(3));
 
     }
 }
