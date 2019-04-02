@@ -35,9 +35,12 @@ public class ArrayDeque<T> {
             deleteDeque();
             items = newItems;
         }
-        if (size() < items.length * 0.25) {
+        if (size() < items.length * 0.25 && size() > 8) {
             T[] newItems = (T[]) new Object[items.length / 2];
-            System.arraycopy(items, 0, newItems, 0, (end +  items.length + 1) % items.length);
+            for (int i = 0; i < size(); i++) {
+                System.arraycopy(items, start, newItems, i, 1);
+            }
+//            System.arraycopy(items, 0, newItems, 0, (end +  items.length + 1) % items.length);
             if (start < 0) {
                 System.arraycopy(items, items.length + start, newItems,
                         newItems.length + start, -start);
@@ -59,6 +62,7 @@ public class ArrayDeque<T> {
     public void addLast(T item) {
         resizeCheck();
         end++;
+        System.out.println("here is the index " + (end + items.length) % items.length);
         items[(end + items.length) % items.length] = item;
     }
 
@@ -128,41 +132,17 @@ public class ArrayDeque<T> {
         for(int i = 0; i < 5; i++) {
             ad.addLast(i);
         }
-        System.out.println(ad.get(0));
-        ad.addFirst(5);
-        System.out.println(ad.get(0));
-        ad.addFirst(6);
-        ad.addLast(7);
-        ad.removeFirst();
-        ad.addFirst(4);
-        ad.removeLast();
-        ad.addLast(8);
 
-        ad.addFirst(3);
+        for (int i = 0;i < 5;i ++) {
+            ad.removeFirst();
+        }
 
-        ad.addLast(1);
-
-        ad.addLast(100);
-
-        ad.addLast(9);
-
-        ad.addFirst(2);
-
-        ad.addFirst(1);
-
-        ad.removeLast();
-
-        ad.removeFirst();
-
-        ad.removeFirst();
-
-        ad.removeFirst();
-
-        ad.removeFirst();
-
+        for(int i = 0; i < 5; i++) {
+            ad.addLast(i);
+        }
         System.out.println(ad.isEmpty());
 
-        ArrayDeque<Integer> copy = new ArrayDeque<>(ad);
+        ArrayDeque<Integer> copy = new ArrayDeque<Integer>(ad);
 
         copy.addFirst(5);
 
