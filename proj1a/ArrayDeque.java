@@ -66,21 +66,15 @@ public class ArrayDeque<T> {
     /** Add an item of type T to the front of the deque */
     public void addFirst(T item) {
         resizeCheck();
-        start--;
+        start = (start - 1 + items.length) % items.length ;
         items = (T[]) items;
-        int tmp = (start + items.length) % items.length;
         items[(start + items.length) % items.length] = item;
     }
 
     /** Add an item of type T to the back of the deque */
     public void addLast(T item) {
         resizeCheck();
-        end++;
-//        System.out.println("here is the index " + (end + items.length) % items.length);
-        int index = (end + items.length) % items.length;
-        String a = items.getClass().getTypeName();
-        String b = item.getClass().getTypeName();
-//        String c = items[0].getClass().getTypeName();
+        end = (end + 1) % items.length;
         items[(end + items.length) % items.length] = (T) item;
     }
 
@@ -128,7 +122,7 @@ public class ArrayDeque<T> {
         }
         T res = (T) items[(end + items.length) % items.length];
         items[(end + items.length) % items.length] = null;
-        end--;
+        end = (end - 1 + items.length) % items.length;
         resizeCheck();
         return res;
     }
@@ -145,47 +139,18 @@ public class ArrayDeque<T> {
         int size = 0;
 
         ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
-        ArrayDeque<Integer> ad2 = new ArrayDeque<>();
-//        ad.removeLast();
-//        ad.removeFirst();
-//        for(int i = 0; i < 10; i++) {
-//            ad.addLast(i);
-//            size = ad.size();
-//        }
-//
-//        for (int i = 0;i < 5;i ++) {
-//            ad.removeFirst();
-//            ad.removeFirst();
-//            size = ad.size();
-//        }
-//
-//        for(int i = 0; i < 5; i++) {
-//            ad.addLast(i);
-//            size = ad.size();
-//        }
-//        System.out.println(ad.isEmpty());
-//        for(int i = 0;i < ad.size(); i++) {
-//            System.out.println(ad.get(i));
-//        }
-        int i = 0;
-        ad.addLast(0);
-        ad.addFirst(1);
-        ad.removeLast()    ;
-        i = ad.get(0)     ;
-        ad.addLast(4);
-        ad.addLast(5);
-        ad.addFirst(6);
-        ad.addFirst(7);
-        ad.addFirst(8);
-        ad.addLast(9);
-        i = ad.get(6)     ;
-        ad.addLast(11);
-        i = ad.get(7)      ;
-        ad.addLast(13);
-        ad.addLast(14);
-        ad.removeLast()    ;
-        ad.removeFirst()    ;
-        ad.removeLast();
+        for (int i = 0; i < 1000; i++) {
+            double rand = Math.random() * 4 + 1;
+            if (rand < 1) {
+                ad.addLast(i);
+            } else if (rand < 2) {
+                ad.addFirst(i);
+            } else if (rand < 3) {
+                ad.removeFirst();
+            } else {
+                ad.removeLast();
+            }
+        }
 
 
     }
