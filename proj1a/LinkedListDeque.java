@@ -1,11 +1,11 @@
-class LinkedListDeque<T> {
+public class LinkedListDeque<T> {
     private class TNode<T> {
         private T item;
         private TNode next;
         private TNode pre;
 
         /** */
-        public TNode(T i, TNode p, TNode n) {
+        TNode(T i, TNode p, TNode n) {
             item = i;
             pre =  p;
             next = n;
@@ -15,14 +15,14 @@ class LinkedListDeque<T> {
     private TNode sentinel;
     private int size;
 
-    public LinkedListDeque() {
+    LinkedListDeque() {
         size = 0;
         sentinel = new TNode(0, null, null);
         sentinel.next = sentinel;
         sentinel.pre = sentinel;
     }
 
-    public LinkedListDeque(LinkedListDeque other) {
+    LinkedListDeque(LinkedListDeque other) {
         size = 0;
         sentinel = new TNode(0, null, null);
         sentinel.next = sentinel;
