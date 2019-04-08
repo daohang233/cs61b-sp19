@@ -3,7 +3,7 @@ public class ArrayDeque<T> {
     private int start;
     private int end;
 
-    ArrayDeque() {
+    public ArrayDeque() {
         start = 0;
         end = -1;
         items = (T[]) new Object[8];
@@ -54,7 +54,7 @@ public class ArrayDeque<T> {
     /** Add an item of type T to the front of the deque */
     public void addFirst(T item) {
         resizeCheck();
-        start = (start - 1 + items.length) % items.length ;
+        start = (start - 1 + items.length) % items.length;
         items = (T[]) items;
         items[(start + items.length) % items.length] = item;
     }
