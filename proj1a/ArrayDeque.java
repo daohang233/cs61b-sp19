@@ -26,23 +26,37 @@ public class ArrayDeque<T> {
 
     /** If the usage factor is more than 50%, double the size of deque */
     private void resizeCheck() {
-        if (size() > items.length * 0.5) {
+        if (size() >= items.length * 0.5) {
             T[] newItems = (T[]) new Object[items.length * 2];
-            System.arraycopy(items, 0, newItems, 0, (end +  items.length + 1) % items.length);
-            if (start < 0) {
-                System.arraycopy(items, items.length + start, newItems,
-                        newItems.length + start, -start);
+            for (int i = 0;i < size(); i++) {
+                newItems[i] = items[(start + items.length + i) % items.length];
             }
+            int newEnd = size() - 1;
             deleteDeque();
             items = newItems;
+
+            start = 0;
+            end = newEnd;
+            return;
+//            T[] newItems = (T[]) new Object[items.length * 2];
+//            System.arraycopy(items, 0, newItems, 0, (end +  items.length + 1) % items.length);
+//            if (start < 0) {
+//                System.arraycopy(items, items.length + start, newItems,
+//                        newItems.length + start, -start);
+//            }
+//            deleteDeque();
+//            items = newItems;
         }
-        if (size() < items.length * 0.25 && size() >= 4) {
+        if (size() < items.length * 0.25 && size() >= 2) {
             T[] newItems = (T[]) new Object[items.length / 2];
             for (int i = 0;i < size(); i++) {
                 newItems[i] = items[(start + items.length + i) % items.length];
             }
+            int newEnd = size() - 1;
             deleteDeque();
             items = newItems;
+            start = 0;
+            end = newEnd;
             return;
 
 //            if (start < 0) {
@@ -85,7 +99,12 @@ public class ArrayDeque<T> {
 
     /** Return the number of the items in the deque */
     public int size() {
-        return (end - start + items.length + 1) % items.length;
+
+        if (start > end) {
+            return (end + items.length - start + 1) % items.length;
+        } else {
+            return (end - start + 1) % items.length;
+        }
     }
 
     /** Print the items in the deque from first to last */
@@ -139,6 +158,19 @@ public class ArrayDeque<T> {
         int size = 0;
 
         ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
+        ad.addLast(0);
+        ad.addFirst(1);
+        ad.addLast(2);
+        ad.addFirst(3);
+        ad.addLast(4);;
+        ad.isEmpty();
+        ad.removeLast();
+        ad.addFirst(7);
+        ad.addFirst(8);
+        ad.addLast(9);
+        ad.addFirst(10);
+        ad.removeLast()      ;
+
         for (int i = 0; i < 1000; i++) {
             double rand = Math.random() * 4 + 1;
             System.out.println(rand);
