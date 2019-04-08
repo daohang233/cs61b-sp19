@@ -15,14 +15,14 @@ public class LinkedListDeque<T> {
     private TNode sentinel;
     private int size;
 
-    LinkedListDeque() {
+    public LinkedListDeque() {
         size = 0;
         sentinel = new TNode(0, null, null);
         sentinel.next = sentinel;
         sentinel.pre = sentinel;
     }
 
-    LinkedListDeque(LinkedListDeque other) {
+    public LinkedListDeque(LinkedListDeque other) {
         size = 0;
         sentinel = new TNode(0, null, null);
         sentinel.next = sentinel;
