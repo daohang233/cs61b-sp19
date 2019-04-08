@@ -38,20 +38,28 @@ public class ArrayDeque<T> {
         }
         if (size() < items.length * 0.25 && size() >= 4) {
             T[] newItems = (T[]) new Object[items.length / 2];
-            for (int i = 0; i < size(); i++) {
-                System.arraycopy(items, start + i, newItems, i, 1);
+            for (int i = 0;i < size(); i++) {
+                newItems[i] = items[(start + items.length + i) % items.length];
             }
-
-//            System.arraycopy(items, 0, newItems, 0, (end +  items.length + 1) % items.length);
-            if (start < 0) {
-                System.arraycopy(items, items.length + start, newItems,
-                        newItems.length + start, -start);
-                items = newItems;
-                return;
-            }
-            end = size() - 1;
-            start = 0;
+            deleteDeque();
             items = newItems;
+            return;
+
+//            if (start < 0) {
+//                System.arraycopy(items, (items.length + start) % items.length, newItems,
+//                        newItems.length + start, -start);
+//                items = newItems;
+//                return;
+//            }
+//            for (int i = 0; i < size(); i++) {
+//                System.arraycopy(items, (start + i) % items.length, newItems, i, 1);
+//            }
+//
+////            System.arraycopy(items, 0, newItems, 0, (end +  items.length + 1) % items.length);
+//
+//            end = size() - 1;
+//            start = 0;
+//            items = newItems;
         }
     }
 
@@ -127,7 +135,7 @@ public class ArrayDeque<T> {
 
     /** Return the item at the given index */
     public T get(int index) {
-        if (index > size()) {
+        if (index > size() || index < 0) {
             return null;
         }
         return (T) items[(index + start + items.length) % items.length];
@@ -137,28 +145,47 @@ public class ArrayDeque<T> {
         int size = 0;
 
         ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
+        ArrayDeque<Integer> ad2 = new ArrayDeque<>();
+//        ad.removeLast();
+//        ad.removeFirst();
+//        for(int i = 0; i < 10; i++) {
+//            ad.addLast(i);
+//            size = ad.size();
+//        }
+//
+//        for (int i = 0;i < 5;i ++) {
+//            ad.removeFirst();
+//            ad.removeFirst();
+//            size = ad.size();
+//        }
+//
+//        for(int i = 0; i < 5; i++) {
+//            ad.addLast(i);
+//            size = ad.size();
+//        }
+//        System.out.println(ad.isEmpty());
+//        for(int i = 0;i < ad.size(); i++) {
+//            System.out.println(ad.get(i));
+//        }
+        int i = 0;
+        ad.addLast(0);
+        ad.addFirst(1);
+        ad.removeLast()    ;
+        i = ad.get(0)     ;
+        ad.addLast(4);
+        ad.addLast(5);
+        ad.addFirst(6);
+        ad.addFirst(7);
+        ad.addFirst(8);
+        ad.addLast(9);
+        i = ad.get(6)     ;
+        ad.addLast(11);
+        i = ad.get(7)      ;
+        ad.addLast(13);
+        ad.addLast(14);
+        ad.removeLast()    ;
+        ad.removeFirst()    ;
         ad.removeLast();
-        ad.removeFirst();
-        for(int i = 0; i < 10; i++) {
-            ad.addLast(i);
-            size = ad.size();
-        }
-
-        for (int i = 0;i < 5;i ++) {
-            ad.removeFirst();
-            ad.removeFirst();
-            size = ad.size();
-        }
-
-        for(int i = 0; i < 5; i++) {
-            ad.addLast(i);
-            size = ad.size();
-        }
-        System.out.println(ad.isEmpty());
-        for(int i = 0;i < ad.size(); i++) {
-            System.out.println(ad.get(i));
-        }
-
 
 
     }
