@@ -110,7 +110,7 @@ public class ArrayDeque<T> {
         }
         T res = (T) items[(items.length + start) % items.length];
         items[(items.length + start) % items.length] = null;
-        start++;
+        start = (start + 1 + items.length) % items.length;
         resizeCheck();
         return res;
     }
@@ -141,9 +141,10 @@ public class ArrayDeque<T> {
         ArrayDeque<Integer> ad = new ArrayDeque<Integer>();
         for (int i = 0; i < 1000; i++) {
             double rand = Math.random() * 4 + 1;
+            System.out.println(rand);
             if (rand < 1) {
                 ad.addLast(i);
-            } else if (rand < 2) {
+            } else if (rand < 2.9) {
                 ad.addFirst(i);
             } else if (rand < 3) {
                 ad.removeFirst();
